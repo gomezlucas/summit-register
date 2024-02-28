@@ -65,21 +65,19 @@ async function postData(url, data) {
     const response = await fetch(url, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json", // Set appropriate content type
+        "Content-Type": "application/json", 
       },
-      body: JSON.stringify(data), // Convert object to JSON string for body
+      body: JSON.stringify(data), 
     });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const responseData = await response.json(); // Parse response as JSON if needed
-    console.log(responseData);
-    return responseData; // Return the response data (optional)
+    const responseData = await response.json(); 
+    return responseData; 
   } catch (error) {
-    console.error("Error:", error);
-    // Handle the error appropriately
+    console.error("Error:", error);   
   }
 }
 
@@ -98,27 +96,12 @@ function getUTMParams() {
   return utmParams;
 }
 
-// Handle para el navbar Mobile
-/*
-function openNavbar(navbarButton) {
-  let hiddenElement = document.querySelector(".hero_left_text_wrapper");
-
-  if (navbarButton.classList.contains("open")) {
-    navbarButton.classList.remove("open");
-    hiddenElement.classList.remove("show");
-  } else {
-    navbarButton.classList.add("open");
-    hiddenElement.classList.add("show");
-  }
-}
-*/
 
 document.addEventListener("DOMContentLoaded", function () {
   const emailInput = document.getElementById("emailInput");
   const emailConfirmationInput = document.getElementById(
     "emailConfirmationInput"
   );
-  /*const navbarButton = document.getElementById("navbar_button");*/
   const form = document.getElementById("register_form");
 
   let isValid = false;
@@ -126,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
     isValid = validateEmail(emailInput.value);
     showValidationResult(emailInput, isValid);
     if (emailConfirmationInput.value !== "") {
-      console.log("entro");
+      
       isEqual = validateEmailConfirmation(emailInput, emailConfirmationInput);
     }
   });
@@ -136,18 +119,13 @@ document.addEventListener("DOMContentLoaded", function () {
     isEqual = validateEmailConfirmation(emailInput, emailConfirmationInput);
     checkButton(isValid, isEqual);
   });
-  /*
+  
   emailConfirmationInput.onpaste = function(e) {
     e.preventDefault();
    }
 
-   */
-  /*
-  navbarButton.addEventListener("click", (e) => {
-    openNavbar(navbarButton);
-  });
-*/
-
+   
+ 
  
   form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -166,9 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
     submitButton.textContent = "Enviando...";
       
     const {utm_source,utm_medium, utm_campaign,utm_term, utm_content} = getUTMParams();
- 
-    console.log(userAgent, 'the user agent is')
-
+     
     const data = {
       email: emailConfirmationValue,
       utm_source,
@@ -179,37 +155,33 @@ document.addEventListener("DOMContentLoaded", function () {
       device: "mobile",
       event_type_id: 1,
     };
-    console.log(data)
 
 
-/*
     postData(baseUrl, data)
-      .then((responseData) => {
+      .then((responseData) => {        
         if (responseData) {
-          step1.classList.add("closing");
-          step1.addEventListener(
-            "animationend",
-            () => {
-              step1.classList.add("hide");
-              languageWrapper.classList.add("hide");
-              step1.classList.remove("closing");
-              if (responseData.msj == "Usuario creado. Se ha enviado un mail de validación"){
-                stepCreated.classList.add("show");
-              }else{
-                stepRegistered.classList.add("show");
-              }
-            },
-            { once: true }
-          );
-        } else {
-          console.log("Data submitted successfully.");
-        }
+       step1.classList.add("closing");
+      step1.addEventListener(
+        "animationend",
+        () => {
+          step1.classList.add("hide");
+          languageWrapper.classList.add("hide");
+          step1.classList.remove("closing");
+          if (responseData.msj.includes("Usuario creado")){
+            stepCreated.classList.add("show");
+          }else{
+            stepRegistered.classList.add("show");
+          }
+        },
+        { once: true }
+      );
+        } 
       })
       .catch((error) => {
         console.error("Error submitting data:", error);
       });
-*/
- 
+
+ /*
     const responseData = "Usuario crado. Se ha enviado un mail de validación"
     setTimeout(() => {
       //   submitButton.classList.remove("disabled");
@@ -231,5 +203,6 @@ document.addEventListener("DOMContentLoaded", function () {
       );
 
     }, 1000);
+*/
   });
 });
