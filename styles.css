@@ -51,16 +51,16 @@ body {
 }
 
 
-.register_step-error {
+.register_step-registered {
     display: none;
 }
 
-.register_step-ok {
+.register_step-created {
     display: none;
     animation: fade-in 500ms forwards;
 }
 
-.register_step-ok.show{
+.register_step-created.show, .register_step-registered.show{
     display: block;
 }
 
@@ -472,7 +472,7 @@ transform: scale(1.1);
 
     .bg-hero {
     
-        min-height: 900px;
+        min-height: 1000px;
     }
 
     .hero_items_left_wrapper{
@@ -484,9 +484,10 @@ transform: scale(1.1);
         padding-left: 51px;
         padding-right: 51px;
     }
-
-
 }
+
+
+
 
 @media screen and (max-width: 1000px) {
     .bg-left {
@@ -499,7 +500,7 @@ transform: scale(1.1);
 
     .bg-hero {
         /*height: 100vh;*/
-        height: auto;
+         height: auto;
         min-height: unset;
     }
 
